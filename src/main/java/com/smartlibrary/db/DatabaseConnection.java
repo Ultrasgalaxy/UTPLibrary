@@ -10,9 +10,10 @@ import java.sql.SQLException;
  */
 public class DatabaseConnection {
 
+    // NOTA: credenciales dedicadas para esta entrega (ver INSTRUCCIONES_DOCENTE.md).
     private static final String URL      = "jdbc:mysql://localhost:3306/utp_library?useSSL=false&serverTimezone=America/Lima&allowPublicKeyRetrieval=true";
-    private static final String USER     = "root";
-    private static final String PASSWORD = "Ultrasgalaxy.@";
+    private static final String USER     = "utp_eval";
+    private static final String PASSWORD = "EvalUTP2026!";
 
     private static Connection connection;
 

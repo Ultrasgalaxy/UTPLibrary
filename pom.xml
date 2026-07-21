@@ -18,16 +18,18 @@
     </properties>
 
     <dependencies>
-        <!-- JavaFX -->
+
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
             <version>${javafx.version}</version>
+            <classifier>win</classifier>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
             <version>${javafx.version}</version>
+            <classifier>win</classifier>
         </dependency>
 
         <!-- MySQL Driver -->
@@ -39,6 +41,7 @@
     </dependencies>
 
     <build>
+        <finalName>UTPLibrary</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -57,6 +60,45 @@
                 <configuration>
                     <mainClass>com.smartlibrary.ui.main.App</mainClass>
                 </configuration>
+            </plugin>
+            <!--
+                Genera un jar "gordo" (todas las dependencias incluidas: JavaFX,
+                driver de MySQL) que se puede ejecutar en cualquier equipo con
+                Java 21 instalado, sin necesidad de Maven ni de un IDE:
+                    java -jar target/SmartLibraryFX-1.0.jar
+            -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.5.1</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals><goal>shade</goal></goals>
+                        <configuration>
+                            <transformers>
+                                <!-- Necesario: el driver de MySQL se registra via
+                                     META-INF/services y el shade plugin, sin esto,
+                                     puede sobreescribir ese archivo en vez de fusionarlo. -->
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>com.smartlibrary.ui.main.Launcher</mainClass>
+                                </transformer>
+                            </transformers>
+                            <filters>
+                                <filter>
+                                    <artifact>*:*</artifact>
+                                    <excludes>
+                                        <exclude>module-info.class</exclude>
+                                        <exclude>META-INF/*.SF</exclude>
+                                        <exclude>META-INF/*.DSA</exclude>
+                                        <exclude>META-INF/*.RSA</exclude>
+                                    </excludes>
+                                </filter>
+                            </filters>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
