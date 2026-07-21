@@ -34,4 +34,4 @@ El proyecto fue desarrollado siguiendo una arquitectura modular e implementando 
 
 ## Autor
 
-Proyecto desarrollado como parte del curso de Ingeniería de Software.
+Diego Salazar
