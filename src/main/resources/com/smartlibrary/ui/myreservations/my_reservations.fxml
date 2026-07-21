@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<AnchorPane prefHeight="520.0" prefWidth="640.0" minHeight="420.0" minWidth="480.0"
+    stylesheets="@../../css/dark-theme.css"
+    xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="com.smartlibrary.ui.myreservations.MyReservationsController">
+  <VBox spacing="16.0" styleClass="card"
+        AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0"
+        AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+    <padding><Insets top="24" bottom="24" left="24" right="24"/></padding>
+    <HBox alignment="CENTER_LEFT" spacing="16.0">
+      <VBox spacing="4.0" HBox.hgrow="ALWAYS">
+        <Label text="AUTOSERVICIO" styleClass="label-eyebrow"/>
+        <Label text="Mis reservas" styleClass="label-title"/>
+      </VBox>
+      <Label fx:id="lblCount" text="0 reservas" styleClass="label-count-chip"/>
+      <Button text="Actualizar" styleClass="btn-icon" onAction="#handleRefresh"/>
+    </HBox>
+    <Label text="Tus reservas activas. Selecciona una y cancelala si ya no la necesitas." styleClass="label-subtitle" wrapText="true"/>
+    <Separator/>
+    <TableView fx:id="tableReservations" VBox.vgrow="ALWAYS">
+      <columns>
+        <TableColumn fx:id="colBook"   text="Libro"          prefWidth="240.0"/>
+        <TableColumn fx:id="colAuthor" text="Autor"           prefWidth="180.0"/>
+        <TableColumn fx:id="colPickup" text="Fecha de recojo" prefWidth="180.0"/>
+      </columns>
+      <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/></columnResizePolicy>
+    </TableView>
+    <Label fx:id="lblStatus" text="" styleClass="label-subtitle" wrapText="true"/>
+    <HBox spacing="12.0">
+      <Button fx:id="btnCancel" text="Cancelar reserva seleccionada" styleClass="btn-danger" onAction="#handleCancel" disable="true"/>
+      <Button text="Cerrar" styleClass="btn-secondary" onAction="#handleClose"/>
+    </HBox>
+  </VBox>
+</AnchorPane>

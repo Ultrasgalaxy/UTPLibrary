@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<StackPane prefHeight="440.0" prefWidth="560.0" minHeight="380.0" minWidth="440.0"
+    stylesheets="@../../css/dark-theme.css"
+    xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="com.smartlibrary.ui.addbook.AddBookController">
+  <padding><Insets top="28" bottom="28" left="28" right="28"/></padding>
+  <VBox spacing="16.0" styleClass="panel-form" maxWidth="480.0">
+    <Label text="NUEVO REGISTRO" styleClass="label-eyebrow"/>
+    <Label text="Agregar libro" styleClass="label-title"/>
+    <Label text="Complete los datos del nuevo libro." styleClass="label-subtitle" wrapText="true"/>
+    <Separator/>
+    <VBox spacing="6.0">
+      <Label text="TITULO" styleClass="label-section"/>
+      <TextField fx:id="fieldTitle" promptText="Titulo del libro"/>
+    </VBox>
+    <VBox spacing="6.0">
+      <Label text="AUTOR" styleClass="label-section"/>
+      <TextField fx:id="fieldAuthor" promptText="Autor del libro"/>
+    </VBox>
+    <HBox spacing="12.0"><VBox.margin><Insets top="8.0"/></VBox.margin>
+      <Button text="Guardar"  styleClass="btn-primary"   onAction="#handleSave"   prefWidth="130.0"/>
+      <Button text="Cancelar" styleClass="btn-secondary" onAction="#handleCancel" prefWidth="130.0"/>
+    </HBox>
+    <Label fx:id="lblStatus" text="" styleClass="label-subtitle" wrapText="true"/>
+  </VBox>
+</StackPane>

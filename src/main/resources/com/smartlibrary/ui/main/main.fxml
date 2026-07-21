@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<BorderPane prefHeight="840.0" prefWidth="1320.0" minHeight="680.0" minWidth="1080.0"
+    stylesheets="@../../css/dark-theme.css"
+    xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="com.smartlibrary.ui.main.MainController">
+  <top>
+    <MenuBar styleClass="menu-bar">
+      <menus>
+        <Menu text="Archivo">
+          <items>
+            <MenuItem text="Cerrar sesion" onAction="#handleLogout"/>
+            <MenuItem text="Salir" onAction="#handleExit"/>
+          </items>
+        </Menu>
+        <Menu text="Agregar">
+          <items>
+            <MenuItem text="Nuevo Libro"   onAction="#handleAddBook"/>
+            <MenuItem text="Nuevo Usuario" onAction="#handleAddUser"/>
+          </items>
+        </Menu>
+        <Menu text="Ver">
+          <items>
+            <MenuItem text="Lista de Libros"    onAction="#handleViewBooks"/>
+            <MenuItem fx:id="menuViewUsers" text="Lista de Usuarios"  onAction="#handleViewUsers"/>
+            <MenuItem text="Prestamos Activos"  onAction="#handleViewLoans"/>
+            <MenuItem text="Reservas Activas"   onAction="#handleViewReservations"/>
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+  </top>
+  <left>
+    <VBox styleClass="sidebar" prefWidth="230.0" minWidth="230.0" spacing="2.0">
+      <padding><Insets top="20" bottom="16" left="14" right="14"/></padding>
+      <HBox alignment="CENTER_LEFT" spacing="10.0">
+        <HBox spacing="0" alignment="CENTER_LEFT">
+          <StackPane style="-fx-background-color:#e02020;-fx-min-width:26;-fx-min-height:30;-fx-max-width:26;-fx-max-height:30;">
+            <Label text="U" style="-fx-font-size:14px;-fx-font-weight:bold;-fx-text-fill:white;"/>
+          </StackPane>
+          <StackPane style="-fx-background-color:#111111;-fx-min-width:26;-fx-min-height:30;-fx-max-width:26;-fx-max-height:30;">
+            <Label text="T" style="-fx-font-size:14px;-fx-font-weight:bold;-fx-text-fill:white;"/>
+          </StackPane>
+          <StackPane style="-fx-background-color:#e02020;-fx-min-width:26;-fx-min-height:30;-fx-max-width:26;-fx-max-height:30;">
+            <Label text="P" style="-fx-font-size:14px;-fx-font-weight:bold;-fx-text-fill:white;"/>
+          </StackPane>
+        </HBox>
+        <VBox spacing="1.0">
+          <Label text="UTP Library" styleClass="wordmark" style="-fx-font-size:14px;"/>
+          <Label text="GESTION DE BIBLIOTECA" styleClass="wordmark-tag"/>
+        </VBox>
+      </HBox>
+      <Region prefHeight="16.0"/>
+      <VBox spacing="6.0" styleClass="card" style="-fx-padding:12;">
+        <Label fx:id="lblSessionName" text="Usuario" styleClass="label-subtitle"
+               style="-fx-text-fill:-text-primary;-fx-font-weight:bold;" wrapText="true"/>
+        <Label fx:id="lblSessionRole" text="Alumno" styleClass="role-chip"/>
+      </VBox>
+      <Button text="Cerrar sesion" styleClass="btn-icon" onAction="#handleLogout" maxWidth="Infinity">
+        <VBox.margin><Insets top="6" bottom="8"/></VBox.margin>
+      </Button>
+      <Separator><VBox.margin><Insets bottom="12"/></VBox.margin></Separator>
+      <Label fx:id="lblSeccionAcciones" text="ACCIONES" styleClass="label-section">
+        <VBox.margin><Insets left="4" bottom="6"/></VBox.margin>
+      </Label>
+      <Button fx:id="btnSideAddBook" text="+  Agregar Libro"   styleClass="sidebar-btn" onAction="#handleAddBook"  maxWidth="Infinity"/>
+      <Button fx:id="btnSideAddUser" text="+  Agregar Usuario" styleClass="sidebar-btn" onAction="#handleAddUser"  maxWidth="Infinity"/>
+      <Separator><VBox.margin><Insets top="14" bottom="14"/></VBox.margin></Separator>
+      <Label text="CONSULTAS" styleClass="label-section">
+        <VBox.margin><Insets left="4" bottom="6"/></VBox.margin>
+      </Label>
+      <Button fx:id="btnSideBooks" text="Libros"     styleClass="sidebar-btn" onAction="#handleViewBooks"         maxWidth="Infinity"/>
+      <Button fx:id="btnSideUsers" text="Usuarios"   styleClass="sidebar-btn" onAction="#handleViewUsers"         maxWidth="Infinity"/>
+      <Button fx:id="btnSideLoans" text="Prestamos"  styleClass="sidebar-btn" onAction="#handleViewLoans"         maxWidth="Infinity"/>
+      <Button fx:id="btnSideRes"   text="Reservas"   styleClass="sidebar-btn" onAction="#handleViewReservations"  maxWidth="Infinity"/>
+      <Region VBox.vgrow="ALWAYS"/>
+      <Separator><VBox.margin><Insets bottom="10"/></VBox.margin></Separator>
+      <Label text="Sede Piura — Sot. 1, Torre A, Av. Sanchez Cerro" styleClass="label-subtitle" wrapText="true"/>
+      <Label text="Lun-Sab 8am-10pm  |  Dom 9am-1pm" styleClass="label-subtitle" wrapText="true"/>
+    </VBox>
+  </left>
+  <center>
+    <TabPane fx:id="mainTabPane" tabClosingPolicy="UNAVAILABLE">
+      <tabs>
+        <!-- TAB SOLICITAR PRESTAMO -->
+        <Tab fx:id="tabIssue" text="Solicitar Prestamo">
+          <content>
+            <ScrollPane fitToWidth="true" fitToHeight="true" styleClass="transparent-scroll">
+              <StackPane>
+                <padding><Insets top="36" bottom="40" left="32" right="32"/></padding>
+                <VBox spacing="20.0" styleClass="card" maxWidth="660.0" StackPane.alignment="TOP_CENTER">
+                  <Label text="PRESTAMO DE LIBRO FISICO" styleClass="label-eyebrow"/>
+                  <Label text="Solicitar prestamo" styleClass="label-title"/>
+                  <Label text="Elige el libro, la fecha y la hora a la que iras a recogerlo a la biblioteca."
+                         styleClass="label-subtitle" wrapText="true"/>
+                  <Separator/>
+                  <!-- Aviso vencimiento -->
+                  <Label fx:id="lblOverdueWarning" text="" wrapText="true"
+                         style="-fx-text-fill:#e08579;-fx-font-weight:bold;" managed="false" visible="false"/>
+                  <!-- Libro -->
+                  <VBox spacing="6.0">
+                    <Label text="LIBRO" styleClass="label-section"/>
+                    <ComboBox fx:id="cbBorrowBook" promptText="Seleccione un libro" maxWidth="Infinity"/>
+                  </VBox>
+                  <!-- Fecha y hora en fila -->
+                  <HBox spacing="16.0">
+                    <VBox spacing="6.0" HBox.hgrow="ALWAYS">
+                      <Label text="FECHA DE RECOJO" styleClass="label-section"/>
+                      <ComboBox fx:id="cbBorrowDate" promptText="Seleccione una fecha"
+                                maxWidth="Infinity" onAction="#handleBorrowDateSelected"/>
+                    </VBox>
+                    <VBox spacing="6.0" HBox.hgrow="ALWAYS">
+                      <Label text="HORA DE RECOJO" styleClass="label-section"/>
+                      <ComboBox fx:id="cbBorrowSlot" promptText="Primero elija una fecha" maxWidth="Infinity"/>
+                    </VBox>
+                  </HBox>
+                  <!-- Info fecha limite -->
+                  <Label fx:id="lblDueDatePreview" text="" styleClass="label-subtitle" wrapText="true"/>
+                  <!-- Botones -->
+                  <HBox spacing="12.0"><padding><Insets top="4"/></padding>
+                    <Button text="Confirmar Prestamo" styleClass="btn-primary"  onAction="#handleBorrow"/>
+                    <Button text="Limpiar"            styleClass="btn-secondary" onAction="#handleClearBorrow"/>
+                  </HBox>
+                  <Label fx:id="lblBorrowStatus" text="" styleClass="label-subtitle" wrapText="true"/>
+                </VBox>
+              </StackPane>
+            </ScrollPane>
+          </content>
+        </Tab>
+
+        <!-- TAB DEVOLVER / RESERVAR -->
+        <Tab fx:id="tabReturn" text="Devolver / Reservar">
+          <content>
+            <ScrollPane fitToWidth="true" fitToHeight="true" styleClass="transparent-scroll">
+              <StackPane>
+                <padding><Insets top="36" bottom="40" left="32" right="32"/></padding>
+                <VBox spacing="20.0" styleClass="card" maxWidth="660.0" StackPane.alignment="TOP_CENTER">
+                  <Label text="OPERACION" styleClass="label-eyebrow"/>
+                  <Label text="Devolver o reservar" styleClass="label-title"/>
+                  <Label text="Para reservar, elige tambien la fecha y hora en que iras a recoger el libro."
+                         styleClass="label-subtitle" wrapText="true"/>
+                  <Separator/>
+                  <!-- Libro -->
+                  <VBox spacing="6.0">
+                    <Label text="LIBRO" styleClass="label-section"/>
+                    <ComboBox fx:id="cbReturnBook" promptText="Seleccione un libro" maxWidth="Infinity"/>
+                  </VBox>
+                  <!-- Fecha y hora (para reserva) -->
+                  <HBox spacing="16.0">
+                    <VBox spacing="6.0" HBox.hgrow="ALWAYS">
+                      <Label text="FECHA DE RECOJO (RESERVA)" styleClass="label-section"/>
+                      <ComboBox fx:id="cbReturnDate" promptText="Solo para reservar"
+                                maxWidth="Infinity" onAction="#handleReturnDateSelected"/>
+                    </VBox>
+                    <VBox spacing="6.0" HBox.hgrow="ALWAYS">
+                      <Label text="HORA DE RECOJO (RESERVA)" styleClass="label-section"/>
+                      <ComboBox fx:id="cbReturnSlot" promptText="Primero elija fecha" maxWidth="Infinity"/>
+                    </VBox>
+                  </HBox>
+                  <!-- Botones -->
+                  <HBox spacing="12.0"><padding><Insets top="4"/></padding>
+                    <Button text="Devolver Libro" styleClass="btn-primary"   onAction="#handleReturn"/>
+                    <Button text="Reservar Libro" styleClass="btn-secondary" onAction="#handleReserve"/>
+                    <Button text="Mis Reservas"   styleClass="btn-danger"    onAction="#handleViewMyReservations"/>
+                    <Button text="Limpiar"        styleClass="btn-secondary" onAction="#handleClearReturn"/>
+                  </HBox>
+                  <Label fx:id="lblReturnStatus" text="" styleClass="label-subtitle" wrapText="true"/>
+                </VBox>
+              </StackPane>
+            </ScrollPane>
+          </content>
+        </Tab>
+
+        <!-- TAB ADMINISTRACION -->
+        <Tab fx:id="tabAdmin" text="Administracion">
+          <content>
+            <fx:include source="/com/smartlibrary/ui/admin/admin_panel.fxml"/>
+          </content>
+        </Tab>
+      </tabs>
+    </TabPane>
+  </center>
+</BorderPane>

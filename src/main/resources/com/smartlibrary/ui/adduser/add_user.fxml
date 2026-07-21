@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<AnchorPane prefHeight="440.0" prefWidth="460.0"
+    stylesheets="@../../css/dark-theme.css"
+    xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="com.smartlibrary.ui.adduser.AddUserController">
+  <VBox spacing="14.0" styleClass="panel-form"
+        AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0"
+        AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+    <Label text="Registrar Usuario" styleClass="label-title"/>
+    <Label text="Complete todos los campos para crear la cuenta." styleClass="label-subtitle"/>
+    <Separator/>
+    <VBox spacing="5.0">
+      <Label text="NOMBRE COMPLETO" styleClass="label-section"/>
+      <TextField fx:id="fieldName" promptText="Nombre completo"/>
+    </VBox>
+    <VBox spacing="5.0">
+      <Label text="NOMBRE DE USUARIO" styleClass="label-section"/>
+      <TextField fx:id="fieldUsername" promptText="Nombre de usuario para iniciar sesion"/>
+    </VBox>
+    <VBox spacing="5.0">
+      <Label text="CONTRASENA" styleClass="label-section"/>
+      <PasswordField fx:id="fieldPassword" promptText="Contrasena"/>
+    </VBox>
+    <VBox spacing="5.0">
+      <Label text="TIPO DE USUARIO" styleClass="label-section"/>
+      <ComboBox fx:id="cbUserType" promptText="Seleccione un tipo" maxWidth="Infinity"/>
+    </VBox>
+    <Label fx:id="lblMembershipInfo" text="" styleClass="label-subtitle" wrapText="true"/>
+    <HBox spacing="12.0"><VBox.margin><Insets top="6.0"/></VBox.margin>
+      <Button text="Registrar" styleClass="btn-primary"   onAction="#handleSave"   prefWidth="120.0"/>
+      <Button text="Cancelar"  styleClass="btn-secondary" onAction="#handleCancel" prefWidth="120.0"/>
+    </HBox>
+    <Label fx:id="lblStatus" text="" styleClass="label-subtitle" wrapText="true"/>
+  </VBox>
+</AnchorPane>

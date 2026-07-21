@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<AnchorPane stylesheets="@../../css/dark-theme.css"
+    xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="com.smartlibrary.ui.admin.AdminPanelController">
+  <ScrollPane fitToWidth="true" styleClass="transparent-scroll"
+      AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0"
+      AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+    <VBox spacing="24.0">
+      <padding><Insets top="32" bottom="40" left="36" right="36"/></padding>
+
+      <HBox alignment="CENTER_LEFT" spacing="16.0">
+        <VBox spacing="4.0" HBox.hgrow="ALWAYS">
+          <Label text="ADMINISTRACION" styleClass="label-eyebrow"/>
+          <Label text="Panel de administracion" styleClass="label-title"/>
+          <Label text="Vision general del sistema y accesos directos de gestion."
+                 styleClass="label-subtitle" wrapText="true"/>
+        </VBox>
+        <Button text="Actualizar" styleClass="btn-icon" onAction="#handleRefresh"/>
+      </HBox>
+
+      <!-- Estadisticas -->
+      <GridPane hgap="16.0" vgap="16.0">
+        <columnConstraints>
+          <ColumnConstraints percentWidth="33.33"/>
+          <ColumnConstraints percentWidth="33.33"/>
+          <ColumnConstraints percentWidth="33.34"/>
+        </columnConstraints>
+        <VBox styleClass="stat-card" GridPane.columnIndex="0" GridPane.rowIndex="0">
+          <Label fx:id="lblTotalBooks"     text="0" styleClass="stat-number"/>
+          <Label text="LIBROS EN CATALOGO"  styleClass="stat-label"/>
+        </VBox>
+        <VBox styleClass="stat-card" GridPane.columnIndex="1" GridPane.rowIndex="0">
+          <Label fx:id="lblAvailableBooks" text="0" styleClass="stat-number"/>
+          <Label text="DISPONIBLES"         styleClass="stat-label"/>
+        </VBox>
+        <VBox styleClass="stat-card" GridPane.columnIndex="2" GridPane.rowIndex="0">
+          <Label fx:id="lblBorrowedBooks"  text="0" styleClass="stat-number"/>
+          <Label text="PRESTADOS"           styleClass="stat-label"/>
+        </VBox>
+        <VBox styleClass="stat-card" GridPane.columnIndex="0" GridPane.rowIndex="1">
+          <Label fx:id="lblReservedBooks"  text="0" styleClass="stat-number"/>
+          <Label text="RESERVADOS"          styleClass="stat-label"/>
+        </VBox>
+        <VBox styleClass="stat-card" GridPane.columnIndex="1" GridPane.rowIndex="1">
+          <Label fx:id="lblTotalUsers"     text="0" styleClass="stat-number"/>
+          <Label text="USUARIOS REGISTRADOS" styleClass="stat-label"/>
+        </VBox>
+        <VBox styleClass="stat-card" GridPane.columnIndex="2" GridPane.rowIndex="1">
+          <Label fx:id="lblOverdueCount"   text="0" styleClass="stat-number"
+                 style="-fx-text-fill: #e08579;"/>
+          <Label text="PRESTAMOS VENCIDOS"  styleClass="stat-label"/>
+        </VBox>
+      </GridPane>
+
+      <!-- Gestion rapida -->
+      <VBox spacing="14.0" styleClass="card">
+        <Label text="GESTION RAPIDA" styleClass="label-eyebrow"/>
+        <HBox spacing="12.0">
+          <Button text="+  Agregar Libro"       styleClass="btn-primary"   onAction="#handleAddBook"/>
+          <Button text="+  Agregar Usuario"     styleClass="btn-primary"   onAction="#handleAddUser"/>
+          <Button text="Ver todos los libros"   styleClass="btn-secondary" onAction="#handleViewBooks"/>
+          <Button text="Ver todos los usuarios" styleClass="btn-secondary" onAction="#handleViewUsers"/>
+        </HBox>
+      </VBox>
+
+      <!-- Tablas de analisis -->
+      <HBox spacing="20.0">
+        <VBox spacing="12.0" styleClass="card" HBox.hgrow="ALWAYS">
+          <Label text="LIBROS MAS SOLICITADOS" styleClass="label-eyebrow"/>
+          <Label text="Ranking historico de prestamos por titulo."
+                 styleClass="label-subtitle" wrapText="true"/>
+          <TableView fx:id="tableTopBooks" prefHeight="240.0">
+            <columns>
+              <TableColumn fx:id="colTopTitle"  text="Titulo"          prefWidth="180.0"/>
+              <TableColumn fx:id="colTopAuthor" text="Autor"           prefWidth="150.0"/>
+              <TableColumn fx:id="colTopTimes"  text="Veces prestado"  prefWidth="110.0"/>
+            </columns>
+            <columnResizePolicy>
+              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+            </columnResizePolicy>
+          </TableView>
+        </VBox>
+
+        <VBox spacing="12.0" styleClass="card" HBox.hgrow="ALWAYS">
+          <Label text="PRESTAMOS VENCIDOS" styleClass="label-eyebrow"/>
+          <Label text="Requieren seguimiento con el usuario."
+                 styleClass="label-subtitle" wrapText="true"/>
+          <TableView fx:id="tableOverdue" prefHeight="240.0">
+            <columns>
+              <TableColumn fx:id="colOverdueUser" text="Usuario"      prefWidth="150.0"/>
+              <TableColumn fx:id="colOverdueBook" text="Libro"        prefWidth="180.0"/>
+              <TableColumn fx:id="colOverdueDue"  text="Fecha limite" prefWidth="110.0"/>
+            </columns>
+            <columnResizePolicy>
+              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+            </columnResizePolicy>
+          </TableView>
+        </VBox>
+      </HBox>
+    </VBox>
+  </ScrollPane>
+</AnchorPane>

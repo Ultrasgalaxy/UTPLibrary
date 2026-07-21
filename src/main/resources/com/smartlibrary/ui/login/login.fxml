@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.shape.Rectangle?>
+<StackPane prefHeight="640.0" prefWidth="480.0" minHeight="560.0" minWidth="420.0"
+    stylesheets="@../../css/dark-theme.css"
+    xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="com.smartlibrary.ui.login.LoginController">
+  <padding><Insets top="28" bottom="28" left="28" right="28"/></padding>
+  <VBox spacing="6.0" alignment="TOP_CENTER" maxWidth="380.0">
+
+    <!-- Logo UTP recreado: tres bloques U(rojo) T(negro) P(rojo) -->
+    <HBox alignment="CENTER" spacing="0">
+      <VBox.margin><Insets bottom="14"/></VBox.margin>
+      <!-- Bloque U - rojo -->
+      <StackPane style="-fx-background-color: #e02020; -fx-min-width: 48; -fx-min-height: 52; -fx-max-width: 48; -fx-max-height: 52;">
+        <Label text="U" style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: white; -fx-font-family: 'Arial';"/>
+      </StackPane>
+      <!-- Bloque T - negro -->
+      <StackPane style="-fx-background-color: #111111; -fx-min-width: 48; -fx-min-height: 52; -fx-max-width: 48; -fx-max-height: 52;">
+        <Label text="T" style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: white; -fx-font-family: 'Arial';"/>
+      </StackPane>
+      <!-- Bloque P - rojo -->
+      <StackPane style="-fx-background-color: #e02020; -fx-min-width: 48; -fx-min-height: 52; -fx-max-width: 48; -fx-max-height: 52;">
+        <Label text="P" style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: white; -fx-font-family: 'Arial';"/>
+      </StackPane>
+    </HBox>
+
+    <!-- Nombre del programa -->
+    <Label text="UTP Library" styleClass="wordmark" style="-fx-font-size: 22px;"/>
+    <Label text="GESTION DE BIBLIOTECA" styleClass="wordmark-tag">
+      <VBox.margin><Insets bottom="26"/></VBox.margin>
+    </Label>
+
+    <VBox spacing="18.0" styleClass="panel-form" maxWidth="380.0">
+      <VBox spacing="4.0">
+        <Label text="BIENVENIDO" styleClass="label-eyebrow"/>
+        <Label text="Iniciar sesion" styleClass="label-title" style="-fx-font-size: 22px;"/>
+      </VBox>
+      <Separator/>
+      <VBox spacing="6.0">
+        <Label text="USUARIO" styleClass="label-section"/>
+        <TextField fx:id="fieldUsername" promptText="Tu usuario"/>
+      </VBox>
+      <VBox spacing="6.0">
+        <Label text="CONTRASENA" styleClass="label-section"/>
+        <PasswordField fx:id="fieldPassword" promptText="Tu contrasena"/>
+      </VBox>
+      <Label fx:id="lblError" text="" styleClass="label-error" wrapText="true"/>
+      <Button fx:id="btnLogin" text="Iniciar sesion" styleClass="btn-primary"
+              maxWidth="Infinity" onAction="#handleLogin"/>
+    </VBox>
+  </VBox>
+</StackPane>

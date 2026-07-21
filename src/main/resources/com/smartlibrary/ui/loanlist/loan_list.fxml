@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<AnchorPane prefHeight="680.0" prefWidth="1020.0" minHeight="480.0" minWidth="660.0"
+    stylesheets="@../../css/dark-theme.css"
+    xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="com.smartlibrary.ui.loanlist.LoanListController">
+  <VBox spacing="18.0" styleClass="card"
+        AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0"
+        AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+    <HBox alignment="CENTER_LEFT" spacing="16.0">
+      <VBox spacing="4.0" HBox.hgrow="ALWAYS">
+        <Label text="CIRCULACION" styleClass="label-eyebrow"/>
+        <Label text="Prestamos activos" styleClass="label-title"/>
+      </VBox>
+      <Label fx:id="lblCount" text="0 prestamos" styleClass="label-count-chip"/>
+      <Button text="Actualizar" styleClass="btn-icon" onAction="#handleRefresh"/>
+    </HBox>
+    <Label text="Libros actualmente prestados." styleClass="label-subtitle"/>
+    <Separator/>
+    <TableView fx:id="tableLoans" VBox.vgrow="ALWAYS">
+      <columns>
+        <TableColumn fx:id="colUser"    text="Usuario"        prefWidth="170.0"/>
+        <TableColumn fx:id="colBook"    text="Libro"          prefWidth="210.0"/>
+        <TableColumn fx:id="colDate"    text="Fecha prestamo" prefWidth="140.0"/>
+        <TableColumn fx:id="colDue"     text="Fecha limite"   prefWidth="130.0"/>
+        <TableColumn fx:id="colOverdue" text="Estado"         prefWidth="100.0"/>
+      </columns>
+      <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/></columnResizePolicy>
+    </TableView>
+  </VBox>
+</AnchorPane>
